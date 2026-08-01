@@ -194,6 +194,22 @@
     background: #faf5ef;
   }
 
+  /* Mobile pequeño: reducir logo y perrito */
+  @media (max-width: 480px) {
+    .header-logo {
+      gap: 0.3rem;
+      max-width: calc(100vw - 150px);
+    }
+
+    .logo-pet {
+      height: 28px;
+    }
+
+    .logo-img {
+      height: 15px;
+    }
+  }
+
   @media (min-width: 768px) {
     .header {
       height: 72px;
