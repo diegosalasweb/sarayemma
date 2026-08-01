@@ -1,0 +1,349 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { categories } from '../data/categories.js';
+
+export function getStaticPaths() {
+  return categories.map((cat) => ({
+    params: { categoria: cat.slug },
+    props: { category: cat },
+  }));
+}
+
+const { category } = Astro.props;
+---
+
+<Layout
+  title={`${category.name} | Sara & Emma`}
+  description={category.description}
+>
+  <!-- Breadcrumb -->
+  <nav class="breadcrumb">
+    <a href="/">Inicio</a>
+    <span>&rsaquo;</span>
+    <span>{category.name}</span>
+  </nav>
+
+  <!-- Category Hero -->
+  <section class="cat-hero">
+    <div class="cat-hero-image">
+      {category.image ? (
+        <img src={category.image} alt={category.name} />
+      ) : (
+        <div class="cat-placeholder" />
+      )}
+      <div class="cat-hero-overlay" />
+    </div>
+    <div class="cat-hero-content">
+      <p class="cat-label">Categoría</p>
+      <h1>{category.name}</h1>
+      <p class="cat-description">{category.description}</p>
+    </div>
+  </section>
+
+  <!-- Subcategories -->
+  <section class="subcategories-section">
+    <div class="subcategories-inner">
+      <h2>Explorar {category.name}</h2>
+      <div class="subcategories-grid">
+        {category.subcategories.map((sub) => (
+          <a href={sub.href} target="_blank" rel="noopener" class="sub-card">
+            <span class="sub-name">{sub.name}</span>
+            <span class="sub-arrow">&rarr;</span>
+          </a>
+        ))}
+      </div>
+
+      <div class="shop-cta">
+        <p>¿Buscas algo más?</p>
+        <a href="https://tienda.sarayemma.cl" target="_blank" rel="noopener" class="btn-shop">
+          Ver toda la tienda
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Other categories -->
+  <section class="other-categories">
+    <div class="other-inner">
+      <h3>Otras categorías</h3>
+      <div class="other-grid">
+        {categories
+          .filter((c) => c.slug !== category.slug)
+          .slice(0, 4)
+          .map((c) => (
+            <a href={`/${c.slug}`} class="other-card">
+              <div class="other-image">
+                {c.image ? (
+                  <img src={c.image} alt={c.name} loading="lazy" />
+                ) : (
+                  <div class="other-placeholder" />
+                )}
+              </div>
+              <span>{c.name}</span>
+            </a>
+          ))}
+      </div>
+    </div>
+  </section>
+</Layout>
+
+<style>
+  /* Breadcrumb */
+  .breadcrumb {
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 1.2rem 2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.08em;
+    color: var(--color-gray-light);
+  }
+
+  .breadcrumb a {
+    color: var(--color-gray-light);
+    transition: color 0.2s;
+  }
+
+  .breadcrumb a:hover {
+    color: var(--color-beige);
+  }
+
+  /* Category Hero */
+  .cat-hero {
+    position: relative;
+    height: 50vh;
+    min-height: 320px;
+    max-height: 500px;
+    overflow: hidden;
+  }
+
+  .cat-hero-image {
+    width: 100%;
+    height: 100%;
+  }
+
+  .cat-hero-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .cat-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-beige-pale), var(--color-beige-light));
+  }
+
+  .cat-hero-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to right, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0.15) 100%);
+  }
+
+  .cat-hero-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 3rem;
+    color: white;
+  }
+
+  .cat-label {
+    font-size: 0.75rem;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    opacity: 0.8;
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-hero-content h1 {
+    font-size: clamp(2rem, 5vw, 3.5rem);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.5rem;
+  }
+
+  .cat-description {
+    font-size: 1rem;
+    opacity: 0.85;
+    font-style: italic;
+    font-weight: 300;
+    max-width: 400px;
+  }
+
+  /* Subcategories */
+  .subcategories-section {
+    padding: 4rem 2rem;
+  }
+
+  .subcategories-inner {
+    max-width: 900px;
+    margin: 0 auto;
+  }
+
+  .subcategories-inner h2 {
+    font-size: 1.8rem;
+    font-weight: 300;
+    letter-spacing: 0.06em;
+    color: var(--color-gray-dark);
+    margin-bottom: 2rem;
+  }
+
+  .subcategories-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 1rem;
+    margin-bottom: 3rem;
+  }
+
+  .sub-card {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1.2rem 1.5rem;
+    border: 1px solid var(--color-border);
+    background: var(--color-white);
+    transition: all 0.2s;
+  }
+
+  .sub-card:hover {
+    border-color: var(--color-beige);
+    background: var(--color-beige-pale);
+    color: var(--color-beige);
+    transform: translateX(4px);
+  }
+
+  .sub-name {
+    font-size: 1rem;
+    letter-spacing: 0.04em;
+    color: var(--color-gray-dark);
+    font-weight: 400;
+  }
+
+  .sub-card:hover .sub-name {
+    color: var(--color-beige);
+  }
+
+  .sub-arrow {
+    color: var(--color-gray-light);
+    transition: color 0.2s;
+  }
+
+  .sub-card:hover .sub-arrow {
+    color: var(--color-beige);
+  }
+
+  /* Shop CTA */
+  .shop-cta {
+    text-align: center;
+    padding: 2rem;
+    background: var(--color-beige-pale);
+    border: 1px solid var(--color-border);
+  }
+
+  .shop-cta p {
+    font-size: 1rem;
+    color: var(--color-gray-mid);
+    font-style: italic;
+    margin-bottom: 1rem;
+  }
+
+  .btn-shop {
+    display: inline-block;
+    background: var(--color-beige);
+    color: white;
+    padding: 0.75rem 2rem;
+    font-size: 0.8rem;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    transition: background 0.2s;
+  }
+
+  .btn-shop:hover {
+    background: #c49060;
+    color: white;
+  }
+
+  /* Other categories */
+  .other-categories {
+    background: var(--color-gray-pale);
+    padding: 3rem 2rem;
+  }
+
+  .other-inner {
+    max-width: 1100px;
+    margin: 0 auto;
+  }
+
+  .other-inner h3 {
+    font-size: 1.2rem;
+    font-weight: 300;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-gray-mid);
+    margin-bottom: 1.5rem;
+  }
+
+  .other-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1rem;
+  }
+
+  .other-card {
+    display: block;
+    text-align: center;
+    transition: color 0.2s;
+  }
+
+  .other-card:hover {
+    color: var(--color-beige);
+  }
+
+  .other-image {
+    aspect-ratio: 1;
+    overflow: hidden;
+    background: var(--color-beige-pale);
+    margin-bottom: 0.75rem;
+  }
+
+  .other-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.4s;
+  }
+
+  .other-card:hover .other-image img {
+    transform: scale(1.05);
+  }
+
+  .other-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-beige-pale), var(--color-beige-light));
+  }
+
+  .other-card span {
+    font-size: 0.9rem;
+    letter-spacing: 0.06em;
+  }
+
+  @media (max-width: 768px) {
+    .subcategories-grid {
+      grid-template-columns: 1fr;
+    }
+
+    .other-grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+
+    .cat-hero-content {
+      padding: 1.5rem;
+    }
+  }
+</style>

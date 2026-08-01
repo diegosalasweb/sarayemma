@@ -1,0 +1,94 @@
+---
+import Header from '../../components/Header.astro';
+import Footer from '../../components/Footer.astro';
+
+const BASE = '/images/categories/accesorios/';
+
+const subcategories = [
+  { name: 'Baberos',                slug: 'baberos',               img: 'baberos.png' },
+  { name: 'Calcetines & Pantys',    slug: 'calcetines-pantys',     img: 'calcetines-pantys.png' },
+  { name: 'Capas para Perros',      slug: 'capas-perros',          img: 'capas-perros.png' },
+  { name: 'Capotas & Gorros',       slug: 'capotas-gorros',        img: 'capotas-gorros-1.png' },
+  { name: 'Pinches',                slug: 'pinches',               img: 'pinches.png' },
+  { name: 'Portachupetes',          slug: 'portachupetes',         img: 'portachupetes.png' },
+  { name: 'Rodilleras Gateadoras',  slug: 'rodilleras-gateadoras', img: 'rodilleras-gateadoras.png' },
+  { name: 'Ver Todo',               slug: 'ver-todo',              img: 'ver-todo-2.png' },
+];
+---
+
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Accesorios | Sara & Emma</title>
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+  </head>
+  <body>
+    <Header />
+    <main class="page-main">
+      <div class="subcat-grid">
+        {subcategories.map((sub) => (
+          <a href={`/accesorios/${sub.slug}/`} class="subcat-card">
+            <div class="subcat-frame">
+              <img src={BASE + sub.img} alt={sub.name} loading="lazy" decoding="async" />
+            </div>
+          </a>
+        ))}
+      </div>
+    </main>
+    <Footer />
+  </body>
+</html>
+
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background: #F9F5F2;
+  }
+  .page-main {
+    flex: 1;
+    background: #F9F5F2;
+    padding: 2rem;
+  }
+  .subcat-grid {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+  .subcat-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.3s ease;
+  }
+  .subcat-card:hover { transform: translateY(-4px); }
+  .subcat-frame {
+    aspect-ratio: 3 / 4;
+    overflow: hidden;
+  }
+  .subcat-frame img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    transition: transform 0.4s ease;
+  }
+  .subcat-card:hover .subcat-frame img { transform: scale(1.04); }
+  @media (max-width: 900px) {
+    .subcat-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 480px) {
+    .subcat-grid { grid-template-columns: 1fr; }
+    .page-main { padding: 1rem; }
+  }
+</style>

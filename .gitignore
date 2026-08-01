@@ -1,0 +1,15 @@
+# Entorno
+.env
+.env.*
+!.env.example
+
+# Astro
+dist/
+.astro/
+
+# Node
+node_modules/
+
+# Sistema
+.DS_Store
+.netlify

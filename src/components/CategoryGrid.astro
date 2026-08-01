@@ -1,0 +1,168 @@
+---
+import { categories } from '../data/categories.js';
+---
+
+<section class="categories-section">
+  <div class="categories-header">
+    <h2>Nuestras Categorías</h2>
+    <p>Explora todo lo que tenemos para ti</p>
+  </div>
+
+  <div class="categories-grid">
+    {categories.map((cat) => (
+      <a href={`/${cat.slug}`} class="category-card">
+        <div class="category-image">
+          {cat.image ? (
+            <img src={cat.image} alt={cat.name} loading="lazy" />
+          ) : (
+            <div class="category-placeholder" />
+          )}
+          <div class="category-overlay" />
+        </div>
+        <div class="category-info">
+          <h3>{cat.name}</h3>
+          <p>{cat.description}</p>
+          <span class="category-link">Ver todo &rarr;</span>
+        </div>
+      </a>
+    ))}
+  </div>
+</section>
+
+<style>
+  .categories-section {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 4rem 2rem;
+  }
+
+  .categories-header {
+    text-align: center;
+    margin-bottom: 3rem;
+  }
+
+  .categories-header h2 {
+    font-size: 2.2rem;
+    font-weight: 300;
+    letter-spacing: 0.08em;
+    color: var(--color-gray-dark);
+    margin-bottom: 0.5rem;
+  }
+
+  .categories-header p {
+    font-size: 1rem;
+    color: var(--color-gray-light);
+    font-style: italic;
+    font-weight: 300;
+  }
+
+  .categories-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 1.5rem;
+  }
+
+  .category-card {
+    display: block;
+    position: relative;
+    overflow: hidden;
+    border: 1px solid var(--color-border);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    cursor: pointer;
+  }
+
+  .category-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 12px 32px rgba(0,0,0,0.1);
+    color: inherit;
+  }
+
+  .category-image {
+    position: relative;
+    aspect-ratio: 3/4;
+    overflow: hidden;
+    background: var(--color-beige-pale);
+  }
+
+  .category-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.5s ease;
+  }
+
+  .category-card:hover .category-image img {
+    transform: scale(1.05);
+  }
+
+  .category-placeholder {
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, var(--color-beige-pale) 0%, var(--color-beige-light) 100%);
+  }
+
+  .category-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(0,0,0,0.35) 0%, transparent 60%);
+  }
+
+  .category-info {
+    padding: 1.2rem;
+    background: var(--color-white);
+  }
+
+  .category-info h3 {
+    font-size: 1.15rem;
+    font-weight: 500;
+    letter-spacing: 0.05em;
+    margin-bottom: 0.35rem;
+    color: var(--color-gray-dark);
+  }
+
+  .category-info p {
+    font-size: 0.85rem;
+    color: var(--color-gray-light);
+    font-style: italic;
+    font-weight: 300;
+    margin-bottom: 0.8rem;
+    line-height: 1.5;
+  }
+
+  .category-link {
+    font-size: 0.78rem;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    color: var(--color-beige);
+    font-style: normal;
+    font-weight: 400;
+  }
+
+  @media (max-width: 1024px) {
+    .categories-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  @media (max-width: 768px) {
+    .categories-grid {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 1rem;
+    }
+
+    .categories-header h2 {
+      font-size: 1.7rem;
+    }
+  }
+
+  @media (max-width: 480px) {
+    .categories-grid {
+      grid-template-columns: 1fr 1fr;
+      gap: 0.75rem;
+    }
+
+    .category-info {
+      padding: 0.9rem;
+    }
+  }
+</style>

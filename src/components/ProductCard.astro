@@ -1,0 +1,140 @@
+---
+export interface Props {
+  image: string;
+  alt?: string;
+  badge?: string;
+  category: string;
+  title: string;
+  price: string;
+  href: string;
+}
+
+const { image, alt = '', badge, category, title, price, href } = Astro.props;
+---
+
+<article class="product-card">
+  <div class="product-image-wrapper">
+    {badge && <span class="product-badge">{badge}</span>}
+    <img src={image} alt={alt} loading="lazy" />
+  </div>
+  <div class="product-info">
+    <span class="product-category">{category}</span>
+    <h3 class="product-title">{title}</h3>
+    <p class="product-price">{price}</p>
+    <a href={href} class="btn-ver-producto">Ver Producto</a>
+  </div>
+</article>
+
+<style>
+  .product-card {
+    background-color: var(--color-bg-card);
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+    overflow: hidden;
+    transition: var(--transition);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    box-shadow: 0 10px 30px rgba(145, 120, 101, 0.03);
+  }
+
+  .product-card:hover {
+    transform: translateY(-8px);
+    box-shadow: 0 20px 40px rgba(145, 120, 101, 0.08);
+    border-color: rgba(145, 120, 101, 0.3);
+    background-color: rgba(255, 255, 255, 0.9);
+  }
+
+  .product-image-wrapper {
+    position: relative;
+    overflow: hidden;
+    background-color: #f0ede9;
+    aspect-ratio: 3 / 4;
+  }
+
+  .product-image-wrapper img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 1.2s cubic-bezier(0.25, 1, 0.5, 1);
+  }
+
+  .product-card:hover .product-image-wrapper img {
+    transform: scale(1.03);
+  }
+
+  .product-badge {
+    position: absolute;
+    bottom: 15px;
+    left: 15px;
+    background-color: var(--color-primary);
+    color: #fff;
+    font-family: var(--font-sans);
+    font-size: 0.65rem;
+    text-transform: uppercase;
+    padding: 4px 12px;
+    letter-spacing: 2px;
+    font-weight: 500;
+    z-index: 1;
+  }
+
+  .product-info {
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    flex-grow: 1;
+  }
+
+  .product-category {
+    font-family: var(--font-sans);
+    font-size: 0.7rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+  }
+
+  .product-title {
+    font-family: var(--font-serif);
+    font-size: 1.4rem;
+    color: var(--color-primary);
+    margin-bottom: 0.5rem;
+    font-weight: 400;
+    line-height: 1.3;
+  }
+
+  .product-price {
+    font-family: var(--font-sans);
+    font-size: 1rem;
+    font-weight: 400;
+    color: var(--color-text);
+    margin-top: 0.2rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .btn-ver-producto {
+    background-color: transparent;
+    border: none;
+    border-bottom: 1px solid var(--color-primary);
+    color: var(--color-primary);
+    padding: 0.5rem 0;
+    font-family: var(--font-sans);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: var(--transition);
+    width: fit-content;
+    margin-top: auto;
+    text-decoration: none;
+    display: inline-block;
+  }
+
+  .btn-ver-producto:hover {
+    color: var(--color-accent);
+    border-color: var(--color-accent);
+    padding-left: 5px;
+  }
+</style>

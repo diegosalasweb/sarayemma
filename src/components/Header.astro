@@ -1,0 +1,231 @@
+---
+---
+
+<header class="header">
+
+  <!-- IZQUIERDA: hamburguesa + lupa -->
+  <div class="header-left">
+    <button class="icon-btn" id="menu-toggle" aria-label="Abrir menú" aria-expanded="false">
+      <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round">
+        <line x1="3" y1="6"  x2="21" y2="6"  />
+        <line x1="3" y1="12" x2="21" y2="12" />
+        <line x1="3" y1="18" x2="21" y2="18" />
+      </svg>
+    </button>
+    <button class="icon-btn" aria-label="Buscar">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <circle cx="11" cy="11" r="7" />
+        <line x1="16.5" y1="16.5" x2="22" y2="22" />
+      </svg>
+    </button>
+  </div>
+
+  <!-- CENTRO: perrito + logo -->
+  <a href="/" class="header-logo">
+    <img src="/images/perrito.gif" alt="" class="logo-pet" aria-hidden="true" />
+    <img src="/images/Logo_SyE-14.png" alt="Sara & Emma" class="logo-img" />
+  </a>
+
+  <!-- DERECHA: Instagram + carrito -->
+  <div class="header-right">
+    <a href="https://instagram.com/sara_y_emma" target="_blank" rel="noopener" class="icon-btn" aria-label="Instagram de Sara & Emma">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <rect x="2" y="2" width="20" height="20" rx="5" ry="5" />
+        <circle cx="12" cy="12" r="4" />
+        <circle cx="17.5" cy="6.5" r="0.6" fill="currentColor" stroke="none" />
+      </svg>
+    </a>
+    <button class="icon-btn" aria-label="Carrito de compras">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+        <path d="M6 2 L3 6 v1 a1 1 0 0 0 1 1 h16 a1 1 0 0 0 1-1 V6 L18 2 Z" />
+        <line x1="3" y1="6" x2="21" y2="6" />
+        <path d="M16 10 a4 4 0 0 1-8 0" />
+      </svg>
+    </button>
+  </div>
+</header>
+
+<!-- Menú desplegable -->
+<nav class="mobile-menu" id="mobile-menu" aria-hidden="true">
+  <ul>
+    <li><a href="/">Inicio</a></li>
+    <li><a href="/colecciones">Colecciones</a></li>
+    <li><a href="/guagua">Guagua</a></li>
+    <li><a href="/infantil">Infantil</a></li>
+    <li><a href="/accesorios">Accesorios</a></li>
+    <li><a href="/decoracion">Decoración</a></li>
+    <li><a href="https://tienda.sarayemma.cl" target="_blank" rel="noopener">Tienda Online</a></li>
+  </ul>
+</nav>
+
+<script>
+  const toggle = document.getElementById('menu-toggle');
+  const menu   = document.getElementById('mobile-menu');
+
+  toggle?.addEventListener('click', () => {
+    const isOpen = menu?.classList.toggle('is-open');
+    toggle.setAttribute('aria-expanded', String(isOpen));
+    menu?.setAttribute('aria-hidden', String(!isOpen));
+  });
+
+  // Cerrar al hacer clic en un link del menú
+  menu?.querySelectorAll('a').forEach((link) => {
+    link.addEventListener('click', () => {
+      menu.classList.remove('is-open');
+      toggle?.setAttribute('aria-expanded', 'false');
+      menu.setAttribute('aria-hidden', 'true');
+    });
+  });
+</script>
+
+<style>
+  .header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 0.75rem;
+    height: 56px;
+    background: #F9F5F2;
+    border-bottom: 1px solid #ede8e3;
+    position: sticky;
+    top: 0;
+    z-index: 200;
+  }
+
+  /* Columnas laterales: mismo ancho para equilibrar el logo */
+  .header-left,
+  .header-right {
+    display: flex;
+    align-items: center;
+    gap: 0;
+    min-width: 72px;
+    flex-shrink: 0;
+  }
+
+  .header-right {
+    justify-content: flex-end;
+  }
+
+  /* Logo centrado */
+  .header-logo {
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    max-width: calc(100vw - 160px);
+  }
+
+  .logo-pet {
+    height: 38px;
+    width: auto;
+    display: block;
+    flex-shrink: 0;
+  }
+
+  .logo-img {
+    height: 20px;
+    width: auto;
+    display: block;
+  }
+
+  /* Botones de ícono */
+  .icon-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    background: none;
+    border: none;
+    cursor: pointer;
+    color: #444;
+    border-radius: 50%;
+    transition: color 0.2s, background 0.2s;
+    text-decoration: none;
+  }
+
+  .icon-btn:hover {
+    color: #d4a574;
+    background: #faf5ef;
+  }
+
+  /* Menú desplegable */
+  .mobile-menu {
+    position: fixed;
+    top: 56px;
+    left: 0;
+    width: 100%;
+    background: #F9F5F2;
+    border-bottom: 1px solid #ede8e3;
+    z-index: 199;
+    transform: translateY(-8px);
+    opacity: 0;
+    pointer-events: none;
+    transition: transform 0.25s ease, opacity 0.25s ease;
+  }
+
+  .mobile-menu.is-open {
+    transform: translateY(0);
+    opacity: 1;
+    pointer-events: auto;
+  }
+
+  .mobile-menu ul {
+    list-style: none;
+    margin: 0;
+    padding: 0.5rem 0 1rem;
+  }
+
+  .mobile-menu ul li a {
+    display: block;
+    padding: 0.75rem 2rem;
+    font-family: 'Cormorant Garamond', Georgia, serif;
+    font-size: 1rem;
+    letter-spacing: 0.06em;
+    color: #444;
+    text-decoration: none;
+    transition: color 0.2s, background 0.2s;
+  }
+
+  .mobile-menu ul li a:hover {
+    color: #d4a574;
+    background: #faf5ef;
+  }
+
+  @media (min-width: 768px) {
+    .header {
+      height: 72px;
+      padding: 0 2.5rem;
+    }
+
+    .header-left,
+    .header-right {
+      gap: 0.25rem;
+      min-width: 80px;
+    }
+
+    .header-logo {
+      gap: 0.6rem;
+      max-width: none;
+    }
+
+    .logo-pet {
+      height: 48px;
+    }
+
+    .logo-img {
+      height: 30px;
+    }
+
+    .icon-btn {
+      width: 40px;
+      height: 40px;
+    }
+
+    .mobile-menu {
+      top: 72px;
+    }
+  }
+</style>

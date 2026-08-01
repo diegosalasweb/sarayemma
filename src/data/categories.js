@@ -1,0 +1,97 @@
+export const categories = [
+  {
+    slug: "ropa-mujer",
+    name: "Ropa Mujer",
+    description: "Prendas femeninas para cada ocasión",
+    image: "/images/categories/ropa-mujer.jpg",
+    subcategories: [
+      { name: "Blusas & Tops", href: "https://tienda.sarayemma.cl/collections/blusas-tops" },
+      { name: "Vestidos", href: "https://tienda.sarayemma.cl/collections/vestidos" },
+      { name: "Pantalones", href: "https://tienda.sarayemma.cl/collections/pantalones" },
+      { name: "Faldas", href: "https://tienda.sarayemma.cl/collections/faldas" },
+      { name: "Chaquetas & Abrigos", href: "https://tienda.sarayemma.cl/collections/chaquetas" },
+    ],
+  },
+  {
+    slug: "ropa-nina",
+    name: "Ropa Niña",
+    description: "Moda infantil con estilo y comodidad",
+    image: "/images/categories/ropa-nina.jpg",
+    subcategories: [
+      { name: "Vestidos Niña", href: "https://tienda.sarayemma.cl/collections/vestidos-nina" },
+      { name: "Conjuntos", href: "https://tienda.sarayemma.cl/collections/conjuntos-nina" },
+      { name: "Pantalones Niña", href: "https://tienda.sarayemma.cl/collections/pantalones-nina" },
+      { name: "Poleras", href: "https://tienda.sarayemma.cl/collections/poleras-nina" },
+    ],
+  },
+  {
+    slug: "accesorios",
+    name: "Accesorios",
+    description: "El detalle que completa tu look",
+    image: "/images/categories/accesorios.jpg",
+    subcategories: [
+      { name: "Bolsos", href: "https://tienda.sarayemma.cl/collections/bolsos" },
+      { name: "Cinturones", href: "https://tienda.sarayemma.cl/collections/cinturones" },
+      { name: "Sombreros & Gorros", href: "https://tienda.sarayemma.cl/collections/sombreros" },
+      { name: "Pañuelos & Bufandas", href: "https://tienda.sarayemma.cl/collections/panuelos" },
+    ],
+  },
+  {
+    slug: "joyeria",
+    name: "Joyería",
+    description: "Piezas únicas que brillan contigo",
+    image: "/images/categories/joyeria.jpg",
+    subcategories: [
+      { name: "Collares", href: "https://tienda.sarayemma.cl/collections/collares" },
+      { name: "Aretes", href: "https://tienda.sarayemma.cl/collections/aretes" },
+      { name: "Pulseras", href: "https://tienda.sarayemma.cl/collections/pulseras" },
+      { name: "Anillos", href: "https://tienda.sarayemma.cl/collections/anillos" },
+    ],
+  },
+  {
+    slug: "zapatos",
+    name: "Zapatos",
+    description: "Pasos con elegancia y comodidad",
+    image: "/images/categories/zapatos.jpg",
+    subcategories: [
+      { name: "Tacones", href: "https://tienda.sarayemma.cl/collections/tacones" },
+      { name: "Sandalias", href: "https://tienda.sarayemma.cl/collections/sandalias" },
+      { name: "Zapatillas", href: "https://tienda.sarayemma.cl/collections/zapatillas" },
+      { name: "Botines", href: "https://tienda.sarayemma.cl/collections/botines" },
+    ],
+  },
+  {
+    slug: "ropa-interior",
+    name: "Ropa Interior",
+    description: "Comodidad y estilo en cada detalle",
+    image: "/images/categories/ropa-interior.jpg",
+    subcategories: [
+      { name: "Sujetadores", href: "https://tienda.sarayemma.cl/collections/sujetadores" },
+      { name: "Pijamas", href: "https://tienda.sarayemma.cl/collections/pijamas" },
+      { name: "Ropa Deportiva Interior", href: "https://tienda.sarayemma.cl/collections/deportiva" },
+    ],
+  },
+  {
+    slug: "temporada",
+    name: "Nueva Temporada",
+    description: "Las últimas tendencias recién llegadas",
+    image: "/images/categories/temporada.jpg",
+    subcategories: [
+      { name: "Novedades", href: "https://tienda.sarayemma.cl/collections/novedades" },
+      { name: "Tendencias", href: "https://tienda.sarayemma.cl/collections/tendencias" },
+      { name: "Colección Otoño", href: "https://tienda.sarayemma.cl/collections/otono" },
+      { name: "Colección Verano", href: "https://tienda.sarayemma.cl/collections/verano" },
+    ],
+  },
+  {
+    slug: "outlet",
+    name: "Outlet",
+    description: "Ofertas especiales con estilo",
+    image: "/images/categories/outlet.jpg",
+    subcategories: [
+      { name: "Ropa con Descuento", href: "https://tienda.sarayemma.cl/collections/outlet-ropa" },
+      { name: "Accesorios con Descuento", href: "https://tienda.sarayemma.cl/collections/outlet-accesorios" },
+      { name: "Liquidación", href: "https://tienda.sarayemma.cl/collections/liquidacion" },
+    ],
+  },
+];

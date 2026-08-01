@@ -1,0 +1,133 @@
+---
+import Layout from '../layouts/Layout.astro';
+import Hero from '../components/Hero.astro';
+import CategoriesSection from '../components/CategoriesSection.astro';
+import InstagramBanner from '../components/InstagramBanner.astro';
+import ProductCard from '../components/ProductCard.astro';
+import { getProducts, formatPrice } from '../lib/jumpseller';
+
+const products = await getProducts(4);
+---
+
+<Layout title="Sara & Emma | Tienda Oficial" description="Descubre nuestra colección de moda femenina con estilo y elegancia.">
+  <div class="page-bg">
+    <Hero ctaHref="/colecciones/" ctaText="Explorar Colección" />
+
+    <CategoriesSection />
+
+    <section class="catalog-container">
+      <div class="section-header">
+        <span class="section-subtitle">Edición Limitada</span>
+        <h2 class="section-title">Nuestra Selección</h2>
+      </div>
+
+      <div class="products-grid">
+        {products.map((p) => (
+          <ProductCard
+            image={p.image}
+            alt={p.name}
+            category={p.category}
+            title={p.name}
+            price={formatPrice(p.price)}
+            href={`https://tienda.sarayemma.cl/products/${p.permalink}`}
+          />
+        ))}
+      </div>
+    </section>
+
+    <InstagramBanner />
+  </div>
+</Layout>
+
+<style>
+  .page-bg {
+    background-image: url('/images/fondo-sye-web.png');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-color: #f7f5f2;
+    min-height: 100%;
+  }
+
+  /* ── Catálogo ── */
+  .catalog-container {
+    max-width: 1300px;
+    margin: 0 auto;
+    padding: 0 2rem 10rem;
+  }
+
+  .section-header {
+    text-align: center;
+    margin-bottom: 4rem;
+  }
+
+  .section-subtitle {
+    display: block;
+    font-family: var(--font-sans);
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    color: var(--color-accent);
+    margin-bottom: 0.5rem;
+  }
+
+  .section-title {
+    font-family: var(--font-serif);
+    font-size: 2.5rem;
+    font-weight: 300;
+    color: var(--color-primary);
+    letter-spacing: 1px;
+  }
+
+  /* ── Grid asimétrico (estilo revista) ── */
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(12, 1fr);
+    gap: 3rem 2rem;
+  }
+
+  .products-grid :global(.product-card:nth-child(4n+1)),
+  .products-grid :global(.product-card:nth-child(4n+2)),
+  .products-grid :global(.product-card:nth-child(4n+3)) {
+    grid-column: span 4;
+  }
+
+  .products-grid :global(.product-card:nth-child(4n+4)) {
+    grid-column: 2 / span 10;
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    align-items: center;
+  }
+
+  .products-grid :global(.product-card:nth-child(4n+4) .product-image-wrapper) {
+    aspect-ratio: 16 / 10;
+  }
+
+  @media (max-width: 1024px) {
+    .products-grid :global(.product-card:nth-child(n)) {
+      grid-column: span 6 !important;
+      display: flex !important;
+      flex-direction: column !important;
+    }
+
+    .products-grid :global(.product-card:nth-child(4n+4) .product-image-wrapper) {
+      aspect-ratio: 3 / 4;
+    }
+  }
+
+  @media (max-width: 680px) {
+    .products-grid :global(.product-card:nth-child(n)) {
+      grid-column: span 12 !important;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .catalog-container {
+      padding: 0 1rem 6rem;
+    }
+
+    .section-title {
+      font-size: 1.8rem;
+    }
+  }
+</style>
