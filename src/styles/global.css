@@ -8,8 +8,8 @@
 
 :root {
   /* Boceto editorial */
-  --color-primary: #1c1c1c;
-  --color-accent: #917865;
+  --color-primary: #2a2b2d;
+  --color-accent: #d8d8d8;
   --color-text: #4a4a4a;
   --color-bg-card: rgba(255, 255, 255, 0.75);
   --font-serif: 'Playfair Display', Georgia, serif;
@@ -17,7 +17,7 @@
   --transition: all 0.4s cubic-bezier(0.25, 1, 0.5, 1);
 
   /* Sistema existente */
-  --color-beige: #d4a574;
+  --color-beige: #d8d8d8;
   --color-beige-light: #f0e0cc;
   --color-beige-pale: #faf5ef;
   --color-gray-dark: #444;
